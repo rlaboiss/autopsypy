@@ -23,8 +23,7 @@ In PsychoPy's Builder, this is how a minimalist experiment would be set up, with
 
 ### Specifying the conditions
 
-The Code component, which can be placed in any routine of the experiment,
-must contain, in its section “Begin Experiment”, the following code:
+The Code component, which must be placed in a separate routine located at the very beginning of the experiment, must contain, in its section “Begin Experiment”, the following code:
 
 ```python
 from autopsypy import AutoPsyPy
