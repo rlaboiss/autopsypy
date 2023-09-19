@@ -24,11 +24,17 @@ In PsychoPy's Builder, this is how a minimalist experiment would be set up, with
 ### Specifying the conditions
 
 The Code component, which can be placed in any routine of the experiment,
-must contain, in its section “Before Experiment”, the following code:
+must contain, in its section “Begin Experiment”, the following code:
 
 ```python
 from autopsypy import AutoPsyPy
 x = AutoPsyPy()
+```
+
+and must also contain, in its second “End Experiment”, the following code:
+
+```python
+x.finish()
 ```
 
 This will create a variable `x` of class `AutoPsyPy`. Any name can be used for the variable, `x` being simply an example here. The autopsypy module will then open the comma-separated value (CSV) file `conditions.csv` that must exist in the current directory. Any other file name can be used through the argument `conditions` of `AutoPsyPy()`. The field delimiter of the CSV file can be specified by the 
