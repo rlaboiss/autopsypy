@@ -1,0 +1,4 @@
+/build/
+/dist/
+/src/autopsypy.egg-info
+/src/__pycache__/
