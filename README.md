@@ -72,6 +72,14 @@ Extra fields can added to the Experiment info section and will contribute to the
 
 At the end of the experiment, the chosen condition is shown to the user.
 
+## Demo 
+
+A demo is available in the [demo/](demo) directory, related to the example presented above. Please, feel free to play with it, in order to better understand the usage of `autopsypy`. In Linux and MacOS systems, the demo can be run with the following command, when launched from that directory:
+
+```sh
+$ psychopy daisy-pine.psyexp
+```
+
 ## Author
 
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
