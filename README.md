@@ -31,7 +31,7 @@ from autopsypy import AutoPsyPy
 x = AutoPsyPy()
 ```
 
-and must also contain, in its second “End Experiment”, the following code:
+and must also contain, in its section “End Experiment”, the following code:
 
 ```python
 x.finish()
