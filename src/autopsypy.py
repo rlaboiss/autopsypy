@@ -144,6 +144,7 @@ class AutoPsyPy(dict):
         self.sessions["participant"][idx] = self.participant
         self.sessions["datetime"][idx] = self.datetime
         self.sessions["condition"][idx] = self.chosen_condition
+        self.sessions["condition"] = self.sessions["condition"].astype(int)
         for f in self.factors:
             self.sessions[f][idx] = self.info[f]
         self.sessions.to_csv(self.sessions_filename, sep=self.delimiter,
