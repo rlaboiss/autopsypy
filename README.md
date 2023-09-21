@@ -2,7 +2,10 @@
 
 ## Introduction
 
-When building inter-participant experiments with PsychoPy's GUI Builder, two issues may arise:
+When building inter-participant experiments with [PsychoPy][]'s [GUI Builder][], two issues may arise:
+
+[PsychoPy]: https://www.psychopy.org/
+[GUI Builder]: https://www.psychopy.org/builder/
 
 1. The need for adapting the stimuli to different conditions, according to the group to which the participant is assigned.
 2. Automatically assigning participants to the experimental conditions, such that the amount of participants across the groups is balanced.
@@ -74,11 +77,12 @@ At the end of the experiment, the chosen condition is shown to the user.
 
 ## Demo 
 
-A demo is available in the [demo/](https://github.com/rlaboiss/autopsypy/tree/main/demo) directory, related to the example presented above. Please, feel free to play with it, in order to better understand the usage of `autopsypy`. In Linux and MacOS systems, the demo can be run with the following command, when launched from that directory:
-
+A demo is available in the [demo/][] directory, related to the example presented above. Please, feel free to play with it, in order to better understand the usage of `autopsypy`. In Linux and MacOS systems, the demo can be run with the following command, when launched from that directory:
 ```sh
 $ psychopy daisy-pine.psyexp
 ```
+
+[demo/]: https://github.com/rlaboiss/autopsypy/tree/main/demo
 
 ## Author
 
@@ -86,7 +90,9 @@ $ psychopy daisy-pine.psyexp
 
 Copyright © 2023  Rafael Laboissière (<rafael@laboissiere.net>)
 
-autopsypy is distributed under the terms of the terms of the [GNU General Public License version 3](https://www.gnu.org/licenses/gpl-3.0) or later.
+autopsypy is distributed under the terms of the terms of the [GNU General Public License version 3][] or later.
+
+[GNU General Public License version 3]: https://www.gnu.org/licenses/gpl-3.0
 
 <!---
 Local Variables:
