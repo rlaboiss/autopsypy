@@ -12,6 +12,19 @@ When building inter-participant experiments with [PsychoPy][]'s [GUI Builder][],
 
 These issues can be addressed by adding extensive Python code to Code block available in the Builder. The goal of the `autopsypy` is to simplify this task, requiring an extremely low amount of Python code to be added to the experiment.
 
+## Installation
+
+The `autopsypy` module is [available at PyPI][]. It can be easily installed on Linux systems with this command, inside the same virtual environment that is used for PsychoPy:
+```sh
+pip install autopsypy
+```
+
+[available at PyPI]: https://pypi.org/project/autopsypy/
+
+In Windows systems, you might try to install it from PsychoPy, in the menu item Tools ⇒ Plugins/packages manager. If this does not work, download the [wheel file for the latest version][] from PyPI, unzip it, and copy the directory `autopsypy-<version>.dist-info` and the files `autopsypy.py` into the `site-packages` directory of your PsychoPy installation (probably `C:\Program Files\PsychoPy3\lib\site-packages`)
+
+[wheel file for the latest version]: https://pypi.org/project/autopsypy/#files
+
 ## How it works
 
 ### An example
@@ -104,6 +117,6 @@ End:
 --->
 
 <!---
-LocalWords:  autopsypy PsychoPy PsychoPy's oculometric Laboissière
+LocalWords:  autopsypy PsychoPy PsychoPy's oculometric Laboissière PyPI
 LocalWords:  GPL AutoPsyPy CSV
 --->
