@@ -15,20 +15,19 @@
 # You should have received a copy of the GNU General Public License along
 # with Foobar. If not, see <https://www.gnu.org/licenses/>.
 
-import pandas as pd
+import csv
 import inspect
 import os.path as op
-import csv
+
+import pandas as pd
 
 
 class AutoPsyPy(dict):
-    """Documentation for AutoPsyPy
-    """
+    """Documentation for AutoPsyPy"""
 
-    def __init__(self, conditions="conditions.csv",
-                 sessions="sessions.csv",
-                 csv_delimiter=";"):
-
+    def __init__(
+        self, conditions="conditions.csv", sessions="sessions.csv", csv_delimiter=";"
+    ):
         super(AutoPsyPy, self).__init__()
 
         for v in ["expInfo", "core", "event", "visual", "win"]:
@@ -46,8 +45,7 @@ class AutoPsyPy(dict):
         nb_conditions = self.conditions.shape[0]
 
         self.factors = set(self.var.expInfo.keys())
-        for field in ["participant", "date", "expName", "psychopyVersion",
-                      "frameRate"]:
+        for field in ["participant", "date", "expName", "psychopyVersion", "frameRate"]:
             self.factors.remove(field)
 
         self.sessions_filename = sessions
@@ -61,20 +59,21 @@ class AutoPsyPy(dict):
         for field in ["participant", "datetime", "condition"]:
             colnames.remove(field)
         if colnames != self.factors:
-            self.error(f"Mismatch between the fields in the Experiment info and the column names in file {self.sessions_filename}")
+            self.error(
+                f"Mismatch between the fields in the Experiment info and the column names in file {self.sessions_filename}"
+            )
 
         self.info = {x: self.var.expInfo[x] for x in self.factors}
 
         df = self.sessions
         for f in self.factors:
             df = df[df[f] == self.info[f]]
-        cnd = df['condition']
+        cnd = df["condition"]
 
         rep = [0] * nb_conditions
         for i in range(len(cnd)):
             rep[int(cnd.iloc[i]) - 1] += 1
-        self.chosen_condition = [i for i, x in enumerate(rep)
-                                 if x == min(rep)][0] + 1
+        self.chosen_condition = [i for i, x in enumerate(rep) if x == min(rep)][0] + 1
 
         for c in self.conditions.columns:
             self[c] = self.conditions[c][self.chosen_condition - 1]
@@ -83,7 +82,9 @@ class AutoPsyPy(dict):
         try:
             value = super(AutoPsyPy, self).__getitem__(key)
         except KeyError:
-            self.error(f"There is no column '{key}' in file '{self.conditions_filename}'")
+            self.error(
+                f"There is no column '{key}' in file '{self.conditions_filename}'"
+            )
         return value
 
     def read_csv(self, filename):
@@ -95,7 +96,9 @@ class AutoPsyPy(dict):
             try:
                 df.to_csv(filename, sep=delimiter, index=False)
             except PermissionError:
-                self.error(f"File {filename} exists but it is not possible to overwrite it.\n Check its permission modes or whether it is locked by another program.")
+                self.error(
+                    f"File {filename} exists but it is not possible to overwrite it.\n Check its permission modes or whether it is locked by another program."
+                )
             return df, delimiter
         else:
             return None, None
@@ -103,8 +106,7 @@ class AutoPsyPy(dict):
     def get_psychopy_var(self, name):
         if not hasattr(self, "var"):
             self.var = lambda: None
-        setattr(self.var, name,
-                inspect.currentframe().f_back.f_back.f_locals[name])
+        setattr(self.var, name, inspect.currentframe().f_back.f_back.f_locals[name])
 
     def check_expinfo_sanity(self):
         if "participant" not in self.var.expInfo:
@@ -115,11 +117,11 @@ class AutoPsyPy(dict):
     def show_message(self, msg):
         self.var.win.winHandle.set_fullscreen(False)
         self.var.win.winHandle.set_visible(False)
-        win_tmp = self.var.visual.Window(fullscr=True, size=[2000, 2000],
-                                         allowGUI=True, color='black')
+        win_tmp = self.var.visual.Window(
+            fullscr=True, size=[2000, 2000], allowGUI=True, color="black"
+        )
         msg = f"{msg}\n\n(type any key to exit)"
-        msg = self.var.visual.TextStim(win_tmp, msg, color='white',
-                                       height=0.05)
+        msg = self.var.visual.TextStim(win_tmp, msg, color="white", height=0.05)
         msg.draw()
         win_tmp.flip()
         self.var.event.waitKeys()
@@ -132,10 +134,13 @@ class AutoPsyPy(dict):
         self.var.core.quit()
 
     def show_info(self):
-        msg = "\n".join([f"participant: {self.participant}",
-                         "\n".join([f"{x}: {self.info[x]}"
-                                    for x in self.info.keys()]),
-                         f"condition: {self.chosen_condition}"])
+        msg = "\n".join(
+            [
+                f"participant: {self.participant}",
+                "\n".join([f"{x}: {self.info[x]}" for x in self.info.keys()]),
+                f"condition: {self.chosen_condition}",
+            ]
+        )
         self.show_message(msg)
 
     def save_session(self):
@@ -147,8 +152,7 @@ class AutoPsyPy(dict):
         self.sessions["condition"] = self.sessions["condition"].astype(int)
         for f in self.factors:
             self.sessions[f][idx] = self.info[f]
-        self.sessions.to_csv(self.sessions_filename, sep=self.delimiter,
-                             index=False)
+        self.sessions.to_csv(self.sessions_filename, sep=self.delimiter, index=False)
 
     def finish(self):
         self.show_info()
