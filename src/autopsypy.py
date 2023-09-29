@@ -100,8 +100,7 @@ class AutoPsyPy(dict):
                     f"File {filename} exists but it is not possible to overwrite it.\n Check its permission modes or whether it is locked by another program."
                 )
             return df, delimiter
-        else:
-            return None, None
+        return None, None
 
     def get_psychopy_var(self, name):
         if not hasattr(self, "var"):
