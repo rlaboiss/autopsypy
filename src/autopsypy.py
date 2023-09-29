@@ -17,6 +17,7 @@
 
 import csv
 import inspect
+import itertools
 import math
 import os.path as op
 
@@ -149,8 +150,23 @@ class AutoPsyPy(dict):
                 f"participant: {self.participant}",
                 "\n".join([f"{x}: {self.info[x]}" for x in self.info.keys()]),
                 f"condition: {self.chosen_condition}",
+                f"\n\ngroups [{'/'.join(self.info.keys())} = N]:",
             ]
         )
+        s = []
+        df = self.sessions
+        df_yes = df[df["keep"] == "yes"]
+        for f in self.info.keys():
+            s.append(df[f].unique())
+        comb = itertools.product(*s)
+        k = list(self.info.keys())
+        for c in comb:
+            df = df_yes
+            for j in range(len(k)):
+                df = df[df[k[j]] == c[j]]
+            msg += f"\n{'/'.join(c)} = {df.shape[0]}"
+        if self.desired_group_size < math.inf:
+            msg += f"\n\nthe desired group size is {self.desired_group_size}"
         self.show_message(msg)
 
     def save_session(self):
@@ -166,5 +182,5 @@ class AutoPsyPy(dict):
         self.sessions.to_csv(self.sessions_filename, sep=self.delimiter, index=False)
 
     def finish(self):
-        self.show_info()
         self.save_session()
+        self.show_info()
