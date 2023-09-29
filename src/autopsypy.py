@@ -17,6 +17,7 @@
 
 import csv
 import inspect
+import math
 import os.path as op
 
 import pandas as pd
@@ -26,7 +27,11 @@ class AutoPsyPy(dict):
     """Documentation for AutoPsyPy"""
 
     def __init__(
-        self, conditions="conditions.csv", sessions="sessions.csv", csv_delimiter=";"
+        self,
+        conditions="conditions.csv",
+        sessions="sessions.csv",
+        csv_delimiter=";",
+        desired_group_size=math.inf,
     ):
         super().__init__()
 
@@ -80,6 +85,8 @@ class AutoPsyPy(dict):
 
         for c in self.conditions.columns:
             self[c] = self.conditions[c][self.chosen_condition - 1]
+
+        self.desired_group_size = desired_group_size
 
     def __getitem__(self, key):
         try:
