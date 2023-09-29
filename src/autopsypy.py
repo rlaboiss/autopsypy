@@ -28,7 +28,7 @@ class AutoPsyPy(dict):
     def __init__(
         self, conditions="conditions.csv", sessions="sessions.csv", csv_delimiter=";"
     ):
-        super(AutoPsyPy, self).__init__()
+        super().__init__()
 
         for v in ["expInfo", "core", "event", "visual", "win"]:
             self.get_psychopy_var(v)
@@ -80,7 +80,7 @@ class AutoPsyPy(dict):
 
     def __getitem__(self, key):
         try:
-            value = super(AutoPsyPy, self).__getitem__(key)
+            value = super().__getitem__(key)
         except KeyError:
             self.error(
                 f"There is no column '{key}' in file '{self.conditions_filename}'"
