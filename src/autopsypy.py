@@ -40,7 +40,7 @@ class AutoPsyPy(dict):
 
         self.conditions_filename = conditions
         self.conditions, dummy = self.read_csv(conditions)
-        if type(self.conditions) != pd.DataFrame:
+        if not isinstance(self.conditions, pd.DataFrame):
             self.error(f"File {conditions} not found")
         nb_conditions = self.conditions.shape[0]
 
@@ -50,7 +50,7 @@ class AutoPsyPy(dict):
 
         self.sessions_filename = sessions
         self.sessions, self.delimiter = self.read_csv(self.sessions_filename)
-        if type(self.sessions) != pd.DataFrame:
+        if not isinstance(self.sessions, pd.DataFrame):
             columns = ["participant", "datetime"] + list(self.factors) + ["condition"]
             self.sessions = pd.DataFrame(columns=columns)
             self.delimiter = csv_delimiter
