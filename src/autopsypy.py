@@ -51,12 +51,14 @@ class AutoPsyPy(dict):
         self.sessions_filename = sessions
         self.sessions, self.delimiter = self.read_csv(self.sessions_filename)
         if not isinstance(self.sessions, pd.DataFrame):
-            columns = ["participant", "datetime"] + list(self.factors) + ["condition"]
+            columns = (
+                ["participant", "datetime"] + list(self.factors) + ["condition", "keep"]
+            )
             self.sessions = pd.DataFrame(columns=columns)
             self.delimiter = csv_delimiter
 
         colnames = set(self.sessions.columns)
-        for field in ["participant", "datetime", "condition"]:
+        for field in ["participant", "datetime", "condition", "keep"]:
             colnames.remove(field)
         if colnames != self.factors:
             self.error(
@@ -66,6 +68,7 @@ class AutoPsyPy(dict):
         self.info = {x: self.var.expInfo[x] for x in self.factors}
 
         df = self.sessions
+        df = df[df["keep"] == "yes"]
         for f in self.factors:
             df = df[df[f] == self.info[f]]
         cnd = df["condition"]
@@ -110,8 +113,9 @@ class AutoPsyPy(dict):
     def check_expinfo_sanity(self):
         if "participant" not in self.var.expInfo:
             self.error("The Experiment info must have the field 'participant'")
-        if "condition" in self.var.expInfo:
-            self.error("The Experiment info must not have the field 'condition'")
+        for cnd in ["condition", "keep"]:
+            if cnd in self.var.expInfo:
+                self.error(f"The Experiment info must not have the field '{cnd}'")
 
     def show_message(self, msg):
         self.var.win.winHandle.set_fullscreen(False)
@@ -149,6 +153,7 @@ class AutoPsyPy(dict):
         self.sessions["datetime"][idx] = self.datetime
         self.sessions["condition"][idx] = self.chosen_condition
         self.sessions["condition"] = self.sessions["condition"].astype(int)
+        self.sessions["keep"][idx] = "yes"
         for f in self.factors:
             self.sessions[f][idx] = self.info[f]
         self.sessions.to_csv(self.sessions_filename, sep=self.delimiter, index=False)
