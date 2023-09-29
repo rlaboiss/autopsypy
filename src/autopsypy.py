@@ -68,7 +68,8 @@ class AutoPsyPy(dict):
             colnames.remove(field)
         if colnames != self.factors:
             self.error(
-                f"Mismatch between the fields in the Experiment info and the column names in file {self.sessions_filename}"
+                "Mismatch between the fields in the Experiment info and the "
+                + "column names in file {self.sessions_filename}"
             )
 
         self.info = {x: self.var.expInfo[x] for x in self.factors}
@@ -108,7 +109,8 @@ class AutoPsyPy(dict):
                 df.to_csv(filename, sep=delimiter, index=False)
             except PermissionError:
                 self.error(
-                    f"File {filename} exists but it is not possible to overwrite it.\n Check its permission modes or whether it is locked by another program."
+                    f"""File {filename} exists but it is not possible to overwrite it.
+Check its permission modes or whether it is locked by another program."""
                 )
             return df, delimiter
         return None, None
