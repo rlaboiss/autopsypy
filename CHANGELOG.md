@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.1 – 2023-09-30
+
+Add ChangeLog file and provide URL for it on the PyPI webpage
+
 ## 0.1.0 – 2023-09-30
 
 Important changes in this release:
