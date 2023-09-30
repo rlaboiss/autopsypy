@@ -1,0 +1,44 @@
+# CHANGELOG
+
+## 0.1.0 – 2023-09-30
+
+Important changes in this release:
+
+- A new argument desired_group_size is added to the class instantiation function AutoPsyPy(). This argument, whose value defaults to infinity (∞), has only informational value (i.e. does not affect the behavior of autopsyy) and is shown at the end of the experiment.
+- Information on the number of participants in each group is shown at the end of the session.
+- A new column entitled keep is added to the session CSV file. This column contains the value yes in the line corresponding to a successfully-run participant. Any other value appearing in this column indicates that the participant is excluded from the study.
+
+This release add a backward-incompatibilty with version 0.0.6. Experiments started with version 0.0.6 or earlier should have their sessions.csv (or whatever name it has) file modified by adding a column keep filled with yes values.
+
+## 0.0.6 – 2023-09-30
+
+Improvements in documentation
+
+## 0.0.5 – 2023-09-19
+
+Fix link for the demo directory
+
+## 0.0.4 – 2023-09-19
+
+Add demo
+
+## 0.0.3 – 2023-09-19
+
+Fix documentation and ensure that condition column contains integers
+
+## 0.0.2 – 2023-09-19
+
+Fix documentation
+
+## 0.0.1 – 2023-09-19
+
+Initial release
+
+<!---
+Local Variables:
+ispell-local-dictionary: "american"
+eval: (auto-fill-mode -1)
+eval: (visual-line-mode)
+eval: (flyspell-mode)
+End:
+--->
