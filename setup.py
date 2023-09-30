@@ -27,6 +27,10 @@ setup(
     author_email="rafael@laboissiere.net",
     license="GPL-3+",
     url="https://github.com/rlaboiss/autopsypy",
+    project_urls={
+        "ChangeLog": "https://github.com/rlaboiss/autopsypy/blob/main/CHANGELOG.md",
+        "Tracker": "https://github.com/rlaboiss/autopsypy/issues",
+    },
     package_dir={"": "src"},
     py_modules=["autopsypy"],
 )
