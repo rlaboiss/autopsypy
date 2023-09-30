@@ -52,10 +52,9 @@ and must also contain, in its section “End Experiment”, the following code:
 x.finish()
 ```
 
-This will create a variable `x` of class `AutoPsyPy`. Any name can be used for the variable, `x` being simply an example here. The autopsypy module will then open the comma-separated value (CSV) file `conditions.csv` that must exist in the current directory. Any other file name can be used through the argument `conditions` of `AutoPsyPy()`. The field delimiter of the CSV file can be specified by the 
-`csv_delimiter` argument and defaults to the semicolon `";"`.
+This will create a variable `x` of class `AutoPsyPy`. Any name can be used for the variable, `x` being simply an example here. The autopsypy module will then open the comma-separated value (CSV) file `conditions.csv` that must exist in the current directory. Any other file name can be used through the argument `conditions` of `AutoPsyPy()`. The field delimiter of the CSV file can be specified by the `csv_delimiter` argument and defaults to the semicolon `";"`. There is also an optional argument `desired_group_size`, through which the experimenter declares the desired number of participants in each group. This argument, whose value defaults to infinity (∞), has only informational value (i.e. does not affect the behavior of `autopsyy`) and is shown at the end of the experiment.
 
-The conditions file must contain the names of the columns (that will be used later, see below) and each subsequent line will represent a experimental condition. In our example, the conditions file will look like this:
+The conditions file must contain, in its first line, the names of the columns (that will be used later, see below) and each subsequent line will represent a experimental condition. In our example, the conditions file will look like this:
 
 ```
 left;right
@@ -67,7 +66,7 @@ The names of the columns will be used in the settings of the Image blocks, more 
 
 ### Specifying the groups
 
-The groups are defined by introducing variables in the “Experiment info” section of the Properties window (accessible by clicking on the gear icon). The `autopsypy` module needs the presence of a “participant” field (with that precise name). A field with name “condition” is forbidden (the experiment will stop with an error message in this case). Any other field created will be used in the definitions of the groups.
+The groups are defined by introducing variables in the “Experiment info” section of the Properties window (accessible by clicking on the gear icon of the PsychoPy Builder). The `autopsypy` module needs the presence of a “participant” field (with that precise name). A field with name “condition” is forbidden (the experiment will stop with an error message in this case). Any other field created will be used in the definitions of the groups.
 
 Let us say that a field with name “age” was created in the Experiment info section and that participants would be either in the “young” group or in the “old” group, an information that will be provided when the experiment is started.
 
@@ -76,17 +75,19 @@ At the first time the experiment is run, a CSV file `sessions.csv` will be creat
 The `condition` column contains integers that indicate the select line in the conditions file. In our case, the value will be either 1 or 2 (for the daisy on the left side or on the right side, respectively). Let us say that, three participants have already run the experiment, two “young” and one “old.” The sessions file will look like the following:
 
 ```
-participant;datetime;age;condition
-1;2023-09-05_10h53.01.058;young;1
-2;2023-09-06_12h33.38.161;old;1
-3;2023-09-06_16h56.26.312;young;2
+participant;datetime;age;condition;keep
+1;2023-09-05_10h53.01.058;young;1;yes
+2;2023-09-06_12h33.38.161;old;1;yes
+3;2023-09-06_16h56.26.312;young;2,yes
 ```
 
 If the fourth participant is “young”, then condition 1 will be run. otherwise, if the fourth participant is “old”, then condition 2 will be run.
 
 Extra fields can added to the Experiment info section and will contribute to the stratification of participants. For instance, if a new field “gender” is created with two values “male” and “female”, then `autopsypy` will consider that four groups exist (“young female”, “old female”, “young male”, and “old male”) and will balance the number of conditions 1 and 2 in each group.
 
-At the end of the experiment, the chosen condition is shown to the user.
+At the end of the session, the chosen condition is shown to the user. Information on the size of each experimental group is also shown, alongside the desired size of the groups (argument `desired_group_size` used when instantiating the variable of class `AutoPsyPy`).
+
+At any point of the study, the experimenter may decide that some participants must be excluded of the study (because, for instance, something went wrong during the session). There are two way to exclude participants: (1) by removing the respective lines from file `sessions.csv` of by changing the corresponding `yes` values in the column `keep` to anything else (for instance, `no`).
 
 ## Demo 
 
@@ -97,11 +98,15 @@ $ psychopy daisy-pine.psyexp
 
 [demo/]: https://github.com/rlaboiss/autopsypy/tree/main/demo
 
+## Acknowledgments
+
+Thanks to Jonathan Parente, for help in designing and testing the `autopsypy` module, and to Cristina-Ioana Galusca for the interesting suggestions for improvements.
+
 ## Author
 
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
-
 Copyright © 2023  Rafael Laboissière (<rafael@laboissiere.net>)
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 
 autopsypy is distributed under the terms of the terms of the [GNU General Public License version 3][] or later.
 
@@ -118,5 +123,5 @@ End:
 
 <!---
 LocalWords:  autopsypy PsychoPy PsychoPy's oculometric Laboissière PyPI
-LocalWords:  GPL AutoPsyPy CSV
+LocalWords:  GPL AutoPsyPy CSV Parente Ioana Galusca psychopy MacOS
 --->
