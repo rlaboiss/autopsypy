@@ -159,7 +159,7 @@ Check its permission modes or whether it is locked by another program."""
         df = self.sessions
         df_yes = df[df["keep"] == "yes"]
         for f in self.info.keys():
-            s.append(df[f].unique())
+            s.append(df_yes[f].unique())
         comb = itertools.product(*s)
         k = list(self.info.keys())
         for c in comb:
