@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.2 – 2023-10-02
+
+- Improve documentation
+- Fix a bug that was resulting in wrong display of group sizes at the end of the session. The lines with value “no” in the “keep” columns were not being excluded.
+
 ## 0.1.1 – 2023-09-30
 
 Add ChangeLog file and provide URL for it on the PyPI webpage
