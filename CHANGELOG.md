@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.3 – 2024-03-12
+
+- Read entire CSV file when sniffing for delimiter bug fix)
+
 ## 0.1.2 – 2023-10-02
 
 - Improve documentation

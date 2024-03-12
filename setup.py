@@ -19,7 +19,7 @@ from setuptools import setup
 
 setup(
     name="autopsypy",
-    version="0.1.2",
+    version="0.1.3",
     description="Automate PsychoPy experiments",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
