@@ -1,4 +1,4 @@
-# Copyright (C) 2023 Rafael Laboissière
+# Copyright (C) 2023, 2024 Rafael Laboissière
 #
 # This file is part of autopsypy
 #
