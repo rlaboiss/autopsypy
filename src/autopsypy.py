@@ -103,7 +103,7 @@ class AutoPsyPy(dict):
         if op.exists(filename) and op.isfile(filename):
             sniffer = csv.Sniffer()
             with open(filename, "r") as fid:
-                delimiter = sniffer.sniff(fid.read(4096)).delimiter
+                delimiter = sniffer.sniff(fid.read()).delimiter
             df = pd.read_csv(filename, sep=delimiter, dtype=str)
             try:
                 df.to_csv(filename, sep=delimiter, index=False)
