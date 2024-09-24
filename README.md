@@ -25,6 +25,9 @@ In Windows systems, you might try to install it from PsychoPy, in the menu item 
 
 [wheel file for the latest version]: https://pypi.org/project/autopsypy/#files
 
+The module has been tested against PsychoPy versions 2023.1.2, 2024.1.4,
+and 2024.2.1. It may work with other versions.
+
 ## How it works
 
 ### An example
