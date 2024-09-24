@@ -16,7 +16,7 @@ These issues can be addressed by adding extensive Python code to Code block avai
 
 The `autopsypy` module is [available at PyPI][]. It can be easily installed on Linux systems with this command, inside the same virtual environment that is used for PsychoPy:
 ```sh
-pip install autopsypy
+python -m pip install autopsypy
 ```
 
 [available at PyPI]: https://pypi.org/project/autopsypy/
