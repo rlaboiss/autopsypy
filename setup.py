@@ -32,4 +32,5 @@ setup(
         "Tracker": "https://github.com/rlaboiss/autopsypy/issues",
     },
     packages=find_packages(include=['autopsypy', 'autopsypy.*']),
+    install_requires=["pandas"],
  )
