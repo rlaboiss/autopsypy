@@ -118,14 +118,18 @@ Check its permission modes or whether it is locked by another program."""
     def get_psychopy_var(self, name):
         if not hasattr(self, "var"):
             self.var = lambda: None
-        setattr(self.var, name, inspect.currentframe().f_back.f_back.f_locals[name])
+        setattr(
+            self.var, name, inspect.currentframe().f_back.f_back.f_locals[name]
+        )
 
     def check_expinfo_sanity(self):
         if "participant" not in self.var.expInfo:
             self.error("The Experiment info must have the field 'participant'")
         for cnd in ["condition", "keep"]:
             if cnd in self.var.expInfo:
-                self.error(f"The Experiment info must not have the field '{cnd}'")
+                self.error(
+                    f"The Experiment info must not have the field '{cnd}'"
+                )
 
     def show_message(self, msg):
         self.var.win.winHandle.set_fullscreen(False)
@@ -181,7 +185,9 @@ Check its permission modes or whether it is locked by another program."""
         self.sessions.loc[idx, "keep"] = "yes"
         for f in self.factors:
             self.sessions.loc[idx, f] = self.info[f]
-        self.sessions.to_csv(self.sessions_filename, sep=self.delimiter, index=False)
+        self.sessions.to_csv(
+            self.sessions_filename, sep=self.delimiter, index=False
+        )
 
     def finish(self):
         self.save_session()
