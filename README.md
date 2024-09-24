@@ -28,6 +28,10 @@ In Windows systems, you might try to install it from PsychoPy, in the menu item 
 The module has been tested against PsychoPy versions 2023.1.2, 2024.1.4,
 and 2024.2.1. It may work with other versions.
 
+If you are using a standalone PsychoPy `autopsypy.py`, it may be that the module installed via `pip` is not found. In this case, add the path where `autopsypy.py`is to the general section of the preferences. For details, see the PsychoPy [documentation][].
+
+[documentation]: https://www.psychopy.org/recipes/addCustomModules.html
+
 ## How it works
 
 ### An example
