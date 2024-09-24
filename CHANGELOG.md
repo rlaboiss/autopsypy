@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.0 – 2024-09-24
+
+- Adjust code for recent versions of PsychoPy. The module has been tested against PsychoPy versions 2023.1.2, 2024.1.4, and 2024.2.1. It may work with other versions.
+
 ## 0.1.3 – 2024-03-12
 
 - Read entire CSV file when sniffing for delimiter bug fix)
@@ -55,3 +59,6 @@ eval: (visual-line-mode)
 eval: (flyspell-mode)
 End:
 --->
+
+<!--  LocalWords:  PsychoPy
+ -->
