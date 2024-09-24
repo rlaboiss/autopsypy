@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.1 – 2024-09-24
+
+- Put the package in a individual directory and use `__init__.py` This is more appropriate for standalone installations of PsychoPy, when setting the library path via preferences/general.
+
 ## 0.2.0 – 2024-09-24
 
 - Adjust code for recent versions of PsychoPy. The module has been tested against PsychoPy versions 2023.1.2, 2024.1.4, and 2024.2.1. It may work with other versions.
