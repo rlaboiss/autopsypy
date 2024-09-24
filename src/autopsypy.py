@@ -20,8 +20,10 @@ import inspect
 import itertools
 import math
 import os.path as op
-
 import pandas as pd
+
+from packaging.version import Version
+from psychopy import __version__ as psychopy_version
 
 
 class AutoPsyPy(dict):
@@ -118,9 +120,11 @@ Check its permission modes or whether it is locked by another program."""
     def get_psychopy_var(self, name):
         if not hasattr(self, "var"):
             self.var = lambda: None
-        setattr(
-            self.var, name, inspect.currentframe().f_back.f_back.f_locals[name]
-        )
+        if Version(psychopy_version) >= Version("2024.1.4"):
+            value = inspect.currentframe().f_back.f_back.f_back.f_locals[name]
+        else:
+            value = inspect.currentframe().f_back.f_back.f_locals[name]
+        setattr(self.var, name, value)
 
     def check_expinfo_sanity(self):
         if "participant" not in self.var.expInfo:
