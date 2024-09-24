@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License along
 # with Foobar. If not, see <https://www.gnu.org/licenses/>.
 
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
     name="autopsypy",
@@ -31,6 +31,5 @@ setup(
         "ChangeLog": "https://github.com/rlaboiss/autopsypy/blob/main/CHANGELOG.md",
         "Tracker": "https://github.com/rlaboiss/autopsypy/issues",
     },
-    package_dir={"": "src"},
-    py_modules=["autopsypy"],
-)
+    packages=find_packages(include=['autopsypy', 'autopsypy.*']),
+ )
