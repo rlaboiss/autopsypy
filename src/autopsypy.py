@@ -174,13 +174,13 @@ Check its permission modes or whether it is locked by another program."""
     def save_session(self):
         idx = len(self.sessions)
         self.sessions.loc[idx] = None
-        self.sessions["participant"][idx] = self.participant
-        self.sessions["datetime"][idx] = self.datetime
-        self.sessions["condition"][idx] = self.chosen_condition
+        self.sessions.loc[idx, "participant"] = self.participant
+        self.sessions.loc[idx, "datetime"] = self.datetime
+        self.sessions.loc[idx, "condition"] = self.chosen_condition
         self.sessions["condition"] = self.sessions["condition"].astype(int)
-        self.sessions["keep"][idx] = "yes"
+        self.sessions.loc[idx, "keep"] = "yes"
         for f in self.factors:
-            self.sessions[f][idx] = self.info[f]
+            self.sessions.loc[idx, f] = self.info[f]
         self.sessions.to_csv(self.sessions_filename, sep=self.delimiter, index=False)
 
     def finish(self):
