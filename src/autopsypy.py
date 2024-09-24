@@ -69,7 +69,7 @@ class AutoPsyPy(dict):
         if colnames != self.factors:
             self.error(
                 "Mismatch between the fields in the Experiment info and the "
-                + "column names in file {self.sessions_filename}"
+                + f"column names in file {self.sessions_filename}"
             )
 
         self.info = {x: self.var.expInfo[x] for x in self.factors}
