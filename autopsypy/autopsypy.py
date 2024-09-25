@@ -53,14 +53,18 @@ class AutoPsyPy(dict):
         nb_conditions = self.conditions.shape[0]
 
         self.factors = set(self.var.expInfo.keys())
-        for field in ["participant", "date", "expName", "psychopyVersion", "frameRate"]:
+        for field in [
+            "participant", "date", "expName", "psychopyVersion", "frameRate"
+        ]:
             self.factors.remove(field)
 
         self.sessions_filename = sessions
         self.sessions, self.delimiter = self.read_csv(self.sessions_filename)
         if not isinstance(self.sessions, pd.DataFrame):
             columns = (
-                ["participant", "datetime"] + list(self.factors) + ["condition", "keep"]
+                ["participant", "datetime"]
+                + list(self.factors)
+                + ["condition", "keep"]
             )
             self.sessions = pd.DataFrame(columns=columns)
             self.delimiter = csv_delimiter
@@ -98,7 +102,8 @@ class AutoPsyPy(dict):
             value = super().__getitem__(key)
         except KeyError:
             self.error(
-                f"There is no column '{key}' in file '{self.conditions_filename}'"
+                f"There is no column '{key}' "
+                f"in file '{self.conditions_filename}'"
             )
         return value
 
@@ -112,8 +117,9 @@ class AutoPsyPy(dict):
                 df.to_csv(filename, sep=delimiter, index=False)
             except PermissionError:
                 self.error(
-                    f"""File {filename} exists but it is not possible to overwrite it.
-Check its permission modes or whether it is locked by another program."""
+                    f"File {filename} exists but it is not possible "
+                    "to overwrite it.\n Check its permission modes or "
+                    "whether it is locked by another program."
                 )
             return df, delimiter
         return None, None
