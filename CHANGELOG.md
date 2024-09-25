@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.2 – 2024-09-25
+
+- Fix indexing problem when choosing the condition. Without this change, the choice of the condition with minimum repetitions was done wrongly, in the case where there are values different from "yes" in the "keep" column of the sessions data frame.
+
 ## 0.2.1 – 2024-09-24
 
 - Put the package in an individual directory and use `__init__.py` This is more appropriate for standalone installations of PsychoPy, when setting the library path via preferences/general.
