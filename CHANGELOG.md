@@ -2,7 +2,7 @@
 
 ## 0.2.1 – 2024-09-24
 
-- Put the package in a individual directory and use `__init__.py` This is more appropriate for standalone installations of PsychoPy, when setting the library path via preferences/general.
+- Put the package in an individual directory and use `__init__.py` This is more appropriate for standalone installations of PsychoPy, when setting the library path via preferences/general.
 
 ## 0.2.0 – 2024-09-24
 
