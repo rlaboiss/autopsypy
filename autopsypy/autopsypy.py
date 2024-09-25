@@ -85,10 +85,11 @@ class AutoPsyPy(dict):
         rep = [0] * nb_conditions
         for i in range(len(cnd)):
             rep[int(cnd.iloc[i]) - 1] += 1
-        self.chosen_condition = [i for i, x in enumerate(rep) if x == min(rep)][0] + 1
+        candidates = [i for i, x in enumerate(rep) if x == min(rep)]
+        self.chosen_condition = candidates[0]
 
         for c in self.conditions.columns:
-            self[c] = self.conditions[c][self.chosen_condition - 1]
+            self[c] = self.conditions[c][self.chosen_condition]
 
         self.desired_group_size = desired_group_size
 
@@ -159,7 +160,7 @@ Check its permission modes or whether it is locked by another program."""
             [
                 f"participant: {self.participant}",
                 "\n".join([f"{x}: {self.info[x]}" for x in self.info.keys()]),
-                f"condition: {self.chosen_condition}",
+                f"condition: {self.chosen_condition + 1}",
                 f"\n\ngroups [{'/'.join(self.info.keys())} = N]:",
             ]
         )
@@ -184,7 +185,7 @@ Check its permission modes or whether it is locked by another program."""
         self.sessions.loc[idx] = None
         self.sessions.loc[idx, "participant"] = self.participant
         self.sessions.loc[idx, "datetime"] = self.datetime
-        self.sessions.loc[idx, "condition"] = self.chosen_condition
+        self.sessions.loc[idx, "condition"] = self.chosen_condition + 1
         self.sessions["condition"] = self.sessions["condition"].astype(int)
         self.sessions.loc[idx, "keep"] = "yes"
         for f in self.factors:
